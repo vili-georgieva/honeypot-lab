@@ -1,0 +1,10 @@
+# never commit real logs, keys or credentials
+logs/
+*.log
+*.log.gz
+*.pem
+*.key
+nginx/ssl/
+honeypot-nginx.env
+.env
+__pycache__/

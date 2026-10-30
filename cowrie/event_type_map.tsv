@@ -1,0 +1,7 @@
+cowrie.login.failed	auth_fail
+cowrie.login.success	auth_success
+cowrie.session.connect	session_start
+cowrie.session.closed	session_end
+cowrie.command.input	command
+cowrie.command.failed	command
+cowrie.client.version	client_fingerprint

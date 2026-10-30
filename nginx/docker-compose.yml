@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  nginx-honeypot:
+    image: nginx:alpine
+    container_name: nginx-honeypot
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./logs:/var/log/nginx
+      - ./ssl:/etc/nginx/ssl:ro
+    restart: unless-stopped

@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: cowrie_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cowrie
+      POSTGRES_USER: cowrie
+      POSTGRES_PASSWORD: cowrie_pw_change_me
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    container_name: cowrie_opensearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=false
+      - OPENSEARCH_JAVA_OPTS=-Xms256m -Xmx256m
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_PERFORMANCE_ANALYZER_AGENT_CLI=true
+
+    ports:
+      - "127.0.0.1:9200:9200"
+    volumes:
+      - os_data:/usr/share/opensearch/data
+
+#  dashboards:
+#    image: opensearchproject/opensearch-dashboards:2
+#    container_name: cowrie_dashboards
+#    restart: unless-stopped
+#    environment:
+#      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+#      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+#    ports:
+#      - "127.0.0.1:5601:5601"
+#    depends_on:
+#      - opensearch
+
+volumes:
+  pg_data:
+  os_data:
